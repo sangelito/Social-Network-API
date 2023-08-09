@@ -93,4 +93,4 @@ const thoughtsController = {
     }
 };
 
-module.export = thoughtsController;
+module.exports = thoughtsController;
