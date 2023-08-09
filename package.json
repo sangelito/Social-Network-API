@@ -1,10 +1,11 @@
 {
-    "name": "your-project-name",
+    "name": "social-network-api",
     "version": "1.0.0",
-    "description": "Your project description",
+    "description": "an api",
     "dependencies": {
         "express": "^4.17.1",
         "moment": "^2.29.4",
-        "mongoose": "^5.13.7"
+        "mongoose": "^5.13.7",
+        "nodemon": "^2.0.4"
     }
 }

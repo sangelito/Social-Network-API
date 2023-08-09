@@ -1,6 +1,8 @@
 const { Schema, model } = require('mongoose');
+// const mongoose = require('mongoose');
+// const { Schema } = mongoose;
 
-const UserSchema = new schema (
+const UsersSchema = new Schema (
     {
         username:{
             type: String, 
