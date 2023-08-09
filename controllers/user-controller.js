@@ -49,6 +49,7 @@ const userController = {
         })
         .catch(err => res.json(err))
     },
+
     deleteUsers({params}, res) {
         Users.findOneAndDelete({_id: params.id})
         .then(dbUsersData => {
@@ -60,4 +61,35 @@ const userController = {
         })
         .catch(err => res.status(400).json(err));
     },
+
+    addFriend({params}, res) {
+        Users.findOneAndUpdate({_id: params.id}, {$push: { friends: params.friendId}}, {new: true})
+        .populate({path: 'friends', select: ('-__v')})
+        .select('-__v')
+        .then(dbUsersData => {
+            if (!dbUsersData) {
+                res.status(404).json({message: 'No User with this particular ID!'});
+                return;
+            }
+        res.json(dbUsersData);
+        })
+        .catch(err => res.json(err));
+    },
+
+    // Delete a current Friend
+    deleteFriend({ params }, res) {
+        Users.findOneAndUpdate({_id: params.id}, {$pull: { friends: params.friendId}}, {new: true})
+        .populate({path: 'friends', select: '-__v'})
+        .select('-__v')
+        .then(dbUsersData => {
+            if(!dbUsersData) {
+                res.status(404).json({message: 'No User with this particular ID!'});
+                return;
+            }
+            res.json(dbUsersData);
+        })
+        .catch(err => res.status(400).json(err));
+    }
 };
+
+module.exports = usersController; 
